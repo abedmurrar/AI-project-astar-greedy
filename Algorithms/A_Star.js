@@ -1,4 +1,4 @@
-const GraphNode = require("../Graph/GraphNode");
+const { GraphNode } = require("../Graph");
 const _ = require("underscore");
 /**
  *
@@ -17,8 +17,8 @@ function Astar(start, goal) {
       return state;
     }
 
-    for(neighbor in state.)
+    // for(neighbor in state.)
   }
 }
 
-module.exports = Astar
+module.exports = Astar;
