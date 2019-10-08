@@ -3,19 +3,11 @@ const hash = require("object-hash");
 class GraphNode {
   /**
    * @constructor
-   * @param {*} element
+   * @param {Number} distance
    */
-  constructor(newElement) {
-    this.element = newElement;
+  constructor(distance) {
+    this.distance = distance;
     this.timestamp = Date.now();
-  }
-
-  getElement() {
-    return this.element;
-  }
-
-  setElement(newElement) {
-    this.element = newElement;
   }
 
   toString() {
