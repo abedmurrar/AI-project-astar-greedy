@@ -7,13 +7,13 @@ class Edge {
    *
    * @param {Node} from
    * @param {Node} to
-   * @param {*} value
+   * @param {Number} distance
    */
 
-  constructor(from, to, value) {
+  constructor(from, to, distance) {
     this.origin = from;
     this.destination = to;
-    this.cost = value;
+    this.cost = distance;
     this.timestamp = Date.now();
   }
 

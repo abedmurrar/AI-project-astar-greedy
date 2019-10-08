@@ -3,10 +3,10 @@ const hash = require("object-hash");
 class GraphNode {
   /**
    * @constructor
-   * @param {Number} distance
+   * @param {String} name
    */
-  constructor(distance) {
-    this.distance = distance;
+  constructor(name) {
+    this.name = name;
     this.timestamp = Date.now();
   }
 

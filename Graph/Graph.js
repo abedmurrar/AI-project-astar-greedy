@@ -2,13 +2,8 @@ const GraphNode = require("./GraphNode");
 const Edge = require("./Edge");
 
 class Graph {
-  constructor(directed = false) {
+  constructor() {
     this.outgoing = new Map();
-    this.incoming = directed ? new Map() : this.outgoing;
-  }
-
-  get isDirected() {
-    return this.incoming !== this.outgoing;
   }
 
   get nodesCount() {
@@ -20,14 +15,11 @@ class Graph {
   }
 
   edgeCount() {
-    //TODO
     let total = 0;
-    // this.outgoing.forEach((value, key, map) => {
-    //   total += this.outgoing.get(GraphNode);
-    // });
-    total += [...this.outgoing.values()].length;
-
-    if (this.isDirected) return total;
+    let maps = [...this.outgoing.values()];
+    maps.forEach(map => {
+      total += map.size;
+    });
     return total / 2;
   }
 
@@ -39,16 +31,9 @@ class Graph {
         edges.add(edge);
       });
     });
-    // Object.values(this.outgoing).forEach(neighbor => {
-    //   Object.values(neighbor).forEach(edge => {
-    //     edges.add(edge);
-    //   });
-    // });
 
     return [...edges];
   }
-
-  endpoints() {}
 
   /**
    *
@@ -66,25 +51,24 @@ class Graph {
     }
   }
 
-  opposite(v) {}
-
-  // degree(v, outgoing = true) {
-  //   let adj = outgoing ? this.outgoing : this.incoming
-
-  // }
-
-  // incident_edges(v, out = true) {}
-
-  insertNode(x = null) {
-    let n = new GraphNode(x);
+  /**
+   * 
+   * @param {String} name 
+   */
+  insertNode(name = null) {
+    let n = new GraphNode(name);
     this.outgoing.set(n, new Map());
-    if (this.isDirected) this.incoming.set(n, new Map());
     // this.outgoing[n] = {};
     // if (this.directed) this.incoming[n] = {};
     return n;
   }
 
-  remove_vertex(x) {}
+  removeNode(x) {
+    if (this.outgoing.has(x)) {
+      return this.outgoing.delete(x);
+    }
+    return false;
+  }
 
   /**
    * Insert and return a new edge from u to v with auxiliary element x
@@ -95,16 +79,13 @@ class Graph {
   insertEdge(u, v, x = null) {
     let e = new Edge(u, v, x);
     let neighbor = new Map();
-    neighbor.set(v, e);
-    this.outgoing.set(u, neighbor);
-
     let oppositeNeighbor = new Map();
+    neighbor.set(v, e);
     oppositeNeighbor.set(u, e);
-    this.incoming.set(v, oppositeNeighbor);
+    this.outgoing.set(u, neighbor);
+    this.outgoing.set(v, oppositeNeighbor);
     return e;
   }
-
-  remove_edge(e) {}
 }
 
 module.exports = Graph;
