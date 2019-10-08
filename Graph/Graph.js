@@ -52,11 +52,13 @@ class Graph {
   }
 
   /**
-   * 
-   * @param {String} name 
+   *
+   * @param {String} name
+   * @param {Number} x
+   * @param {Number} y
    */
-  insertNode(name = null) {
-    let n = new GraphNode(name);
+  insertNode(x, y, name = null) {
+    let n = new GraphNode(name, x, y);
     this.outgoing.set(n, new Map());
     // this.outgoing[n] = {};
     // if (this.directed) this.incoming[n] = {};
