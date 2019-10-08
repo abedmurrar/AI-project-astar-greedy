@@ -1,0 +1,16 @@
+{
+  "name": "bzu.ai.project1",
+  "version": "0.0.1",
+  "description": "Project for Atrificial Intelligence course in birzeit university",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abed Al Rahman Murrar",
+  "license": "ISC",
+  "dependencies": {
+    "object-hash": "^2.0.0",
+    "underscore": "^1.9.1"
+  }
+}
