@@ -1,5 +1,5 @@
-const AStar = require("./A_Star");
+const AStar = require('./A_Star');
 
 module.exports = {
-  AStar
+    AStar
 };
