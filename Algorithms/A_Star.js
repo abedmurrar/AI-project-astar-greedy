@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { GraphNode } = require('../Graph');
 const { PriorityQueue } = require('../Queue');
 const _ = require('underscore');
@@ -7,9 +8,11 @@ const _ = require('underscore');
  * @param {GraphNode} start
  * @param {GraphNode} goal
  */
-function Astar(start, goal) {
+function Astar(graph, start, goal) {
     let frontier = new PriorityQueue();
     let explored = new Set();
+
+    frontier.enqueue(start, 1);
 
     while (!frontier.isEmpty()) {
         let state = frontier.pop();

@@ -12,10 +12,15 @@ class Edge {
      */
 
     constructor(from, to, distance) {
+        // class attributes
         this.origin = from;
         this.destination = to;
         this.cost = distance;
         this.timestamp = Date.now();
+
+        // bind this
+        this.opposite = this.opposite.bind(this);
+        this.toString = this.toString.bind(this);
     }
 
     /**

@@ -6,10 +6,14 @@ class GraphNode {
      * @param {String} name
      */
     constructor(name, x, y) {
+        // class attributes
         this.name = name;
         this.x = x;
         this.y = y;
         this.timestamp = Date.now();
+
+        // bind this
+        this.toString = this.toString.bind(this);
     }
 
     toString() {

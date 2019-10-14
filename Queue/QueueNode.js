@@ -10,6 +10,7 @@ class QueueNode {
      * @param {QueueNode} previous
      */
     constructor(element, priority, next = null, previous = null) {
+        // class attributes
         this.element = element;
         this.priority = priority;
         this.next = next;

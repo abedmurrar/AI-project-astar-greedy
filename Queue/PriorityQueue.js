@@ -4,8 +4,14 @@ const { GraphNode } = require('../Graph');
 
 class PriorityQueue {
     constructor() {
+        // class attributes
         this.size = 0;
         this.head = null;
+
+        // bind this
+        this.enqueue = this.enqueue.bind(this);
+        this.dequeue = this.dequeue.bind(this);
+        this.isEmpty = this.isEmpty.bind(this);
     }
 
     /**

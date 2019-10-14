@@ -3,7 +3,17 @@ const Edge = require('./Edge');
 
 class Graph {
     constructor() {
+        // class attributes
         this.outgoing = new Map();
+
+        // bind this
+        this.edgeCount = this.edgeCount.bind(this);
+        this.edges = this.edges.bind(this);
+        this.getEdge = this.getEdge.bind(this);
+        this.insertNode = this.insertNode.bind(this);
+        this.removeNode = this.removeNode.bind(this);
+        this.insertEdge = this.insertEdge.bind(this);
+        this.getNodeByCoordinates = this.getNodeByCoordinates.bind(this);
     }
 
     get nodesCount() {
