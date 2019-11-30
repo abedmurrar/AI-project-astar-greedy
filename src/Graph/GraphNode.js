@@ -11,9 +11,12 @@ class GraphNode {
         this.x = x;
         this.y = y;
         this.timestamp = Date.now();
-
         // bind this
         this.toString = this.toString.bind(this);
+    }
+
+    getHash() {
+        return hash(this, { algorithm: 'md5', encoding: 'base64' });
     }
 
     toString() {
