@@ -28,64 +28,43 @@ class PriorityQueue {
     /**
      *
      * @param {GraphNode} graphNode
+     * @param {GraphNode} parent
      * @param {Number} priority
      * @returns QueueNode
      */
-    enqueue(graphNode, priority) {
+    enqueue(graphNode, parent, priority) {
         if (this.has(graphNode)) {
             return;
         }
-        let newNode = new QueueNode(graphNode, priority);
+        let newNode = new QueueNode(Object.assign(graphNode, { p: parent }), priority);
 
         // If Empty
         if (this.isEmpty()) {
             this.head = newNode;
-            this.size += 1;
+            this.size = 1;
             return this.head;
         }
 
-        // If smaller than head
-
-        // if (this.size === 1) {
-        //     if (newNode.priority < this.head.priority) {
-        //         this.head.previous = newNode;
-        //         newNode.next = this.head;
-        //         this.head = newNode;
-        //     } else {
-        //         this.head.next = newNode;
-        //     }
-        //     this.size += 1;
-        //     return newNode;
-        // }
-
-        // If more than 1
-        let traversal = this.head;
-
-        let temp = null;
-        console.log(this.head == null);
-        console.log(this.size);
-
-        while (traversal != null) {
-            temp = traversal;
-            if (newNode.priority <= traversal.priority) {
-                newNode.next = traversal;
-                if (traversal.previous != null) {
-                    traversal.previous.next = newNode;
-                    newNode.previous = traversal.previous;
-                    traversal.previous = newNode;
-                } else {
-                    traversal.previous = newNode;
+        let temp = this.head;
+        while (temp) {
+            if (newNode.priority <= temp.priority) {
+                newNode.next = temp;
+                newNode.previous = temp.previous;
+                if (!temp.previous) {
                     this.head = newNode;
+                } else {
+                    temp.previous.next = newNode;
+                    temp.previous = newNode;
                 }
-                this.size += 1;
-                return newNode;
+                break;
+            } else if (temp.next === null) {
+                temp.next = newNode;
+                newNode.previous = temp;
+                break;
+            } else {
+                temp = temp.next;
             }
-            traversal = traversal.next;
         }
-
-        //If nothing worked then add to last
-        temp.next = newNode;
-
         this.size += 1;
         return newNode;
     }
@@ -93,17 +72,20 @@ class PriorityQueue {
     dequeue() {
         if (!this.isEmpty()) {
             const popped = this.head;
+            if (this.head && this.head.next) {
+                this.head.next.previous = null;
+            }
             this.head = this.head.next;
+
             this.size -= 1;
             return popped;
         } else {
-            console.error('Queue is empty!');
             return null;
         }
     }
 
     isEmpty() {
-        return this.size === 0 && this.head == null;
+        return this.size === 0;
     }
 
     /**
@@ -126,8 +108,9 @@ class PriorityQueue {
 
         while (traversal != null) {
             console.log(`${traversal.element.name} ${traversal.priority}`);
-            traversal = traversal.previous;
+            traversal = traversal.next;
         }
+        console.log();
     }
 }
 

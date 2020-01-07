@@ -47,7 +47,15 @@ class Edge {
     }
 
     toString() {
-        return hash(this, { algorithm: 'md5', encoding: 'base64' });
+        return hash(
+            {
+                origin: this.origin,
+                destination: this.destination,
+                cost: this.cost,
+                timestamp: this.timestamp
+            },
+            { algorithm: 'md5', encoding: 'base64' }
+        );
     }
 }
 

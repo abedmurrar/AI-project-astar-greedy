@@ -20,7 +20,10 @@ class GraphNode {
     }
 
     toString() {
-        return hash(this, { algorithm: 'md5', encoding: 'base64' });
+        return hash(
+            { name: this.name, x: this.x, y: this.y, timestamp: this.timestamp },
+            { algorithm: 'md5', encoding: 'base64' }
+        );
     }
 }
 

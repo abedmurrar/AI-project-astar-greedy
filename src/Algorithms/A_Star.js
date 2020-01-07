@@ -6,7 +6,6 @@ const distance = require('euclidean-distance');
 
 const KILOMETER_PIXEL_RATIO = 10 / 106; // 10km for every 106 pixel on image
 
-
 /**
  *
  * @param {Graph} graph
@@ -17,16 +16,14 @@ function Astar(graph, start, goal, isGreedy = false) {
     let frontier = new PriorityQueue();
     let explored = new Set();
 
-    frontier.enqueue(start, heuristic(start, goal));
+    frontier.enqueue(start, null, heuristic(start, goal));
 
     while (!frontier.isEmpty()) {
-
         let { element: current } = frontier.dequeue();
         explored.add(current);
-        console.log(current.name);
 
         if (distance([current.x, current.y], [goal.x, goal.y]) === 0) {
-            return explored;
+            return current;
             // return current;
             // change it to return all route
         }
@@ -37,7 +34,9 @@ function Astar(graph, start, goal, isGreedy = false) {
             if (!frontier.has(neighborNode) && !explored.has(neighborNode)) {
                 frontier.enqueue(
                     neighborNode,
-                    heuristic(current, neighborNode) * KILOMETER_PIXEL_RATIO + (!isGreedy && edge.cost)
+                    current,
+                    heuristic(current, neighborNode) * KILOMETER_PIXEL_RATIO +
+                        (!isGreedy && edge.cost)
                 );
             }
         }
