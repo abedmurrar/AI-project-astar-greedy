@@ -54,8 +54,8 @@ class PriorityQueue {
                     this.head = newNode;
                 } else {
                     temp.previous.next = newNode;
-                    temp.previous = newNode;
                 }
+                temp.previous = newNode;
                 break;
             } else if (temp.next === null) {
                 temp.next = newNode;

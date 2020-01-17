@@ -84,8 +84,19 @@ let run_algorithm_button = $('#start-algorithm');
 run_algorithm_button.click(function() {
     const value_a = $('#from_node').val();
     const value_b = $('#to_node').val();
-    let k = astar(graph, graph.nodes[value_a], graph.nodes[value_b], true);
+    let k = astar(graph, graph.nodes[value_a], graph.nodes[value_b], false);
     console.log(k);
+    var c = document.getElementById('myCanvas');
+    var ctx = c.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(k.x, k.y);
+    let parent = k.p;
+    while (parent != null) {
+        ctx.lineTo(parent.x, parent.y);
+        parent = parent.p;
+    }
+    ctx.stroke();
+    console.log(graph);
 });
 
 function fillSelect(element) {
@@ -121,8 +132,17 @@ window.onload = function() {
     var canvas = document.getElementById('myCanvas');
     var ctx = canvas.getContext('2d');
     // let img = document.querySelector('img');
-    var img = document.getElementById('lel');
+    // var img = document.getElementById('lel');
+    let imageObj = new Image();
+    ctx.canvas.width = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+    imageObj.onload = function() {
+        ctx.canvas.width = imageObj.width;
+        ctx.canvas.height = imageObj.height;
+        ctx.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
+    };
+    imageObj.src = 'Map.png';
 
     // img.src = 'Map.png';
-    ctx.drawImage(img, img.clientHeight + 20, img.clientWidth + 20);
+    // ctx.drawImage(img, img.clientHeight + 20, img.clientWidth + 20);
 };
